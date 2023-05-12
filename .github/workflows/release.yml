@@ -33,15 +33,51 @@ jobs:
             DOCKERFILE: Dockerfile.alpine
             QEMU_ARCH: x86_64
 
+          - name: alpine-x86_64
+            os: ubuntu-latest
+            BASE_IMAGE: library/node:18-alpine
+            DOCKERFILE: Dockerfile.alpine
+            QEMU_ARCH: x86_64
+
+          - name: alpine-x86_64
+            os: ubuntu-latest
+            BASE_IMAGE: library/node:20-alpine
+            DOCKERFILE: Dockerfile.alpine
+            QEMU_ARCH: x86_64
+
           - name: alpine-arm32v6
             os: ubuntu-latest
             BASE_IMAGE: arm32v6/node:16-alpine
             DOCKERFILE: Dockerfile.alpine
             QEMU_ARCH: arm
 
+          - name: alpine-arm32v6
+            os: ubuntu-latest
+            BASE_IMAGE: arm32v6/node:18-alpine
+            DOCKERFILE: Dockerfile.alpine
+            QEMU_ARCH: arm
+
+          - name: alpine-arm32v6
+            os: ubuntu-latest
+            BASE_IMAGE: arm32v6/node:20-alpine
+            DOCKERFILE: Dockerfile.alpine
+            QEMU_ARCH: arm
+
           - name: alpine-arm64v8
             os: ubuntu-latest
             BASE_IMAGE: arm64v8/node:16-alpine
+            DOCKERFILE: Dockerfile.alpine
+            QEMU_ARCH: aarch64
+
+          - name: alpine-arm64v8
+            os: ubuntu-latest
+            BASE_IMAGE: arm64v8/node:18-alpine
+            DOCKERFILE: Dockerfile.alpine
+            QEMU_ARCH: aarch64
+
+          - name: alpine-arm64v8
+            os: ubuntu-latest
+            BASE_IMAGE: arm64v8/node:20-alpine
             DOCKERFILE: Dockerfile.alpine
             QEMU_ARCH: aarch64
 
