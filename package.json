@@ -4,7 +4,7 @@
   "author": {
     "name": "Microsoft Corporation"
   },
-  "version": "0.10.1-pre.11",
+  "version": "0.10.2",
   "license": "MIT",
   "main": "./lib/index.js",
   "types": "./typings/node-pty.d.ts",
@@ -64,11 +64,12 @@
     "decompress-targz": "^4.1.1",
     "eslint": "^6.8.0",
     "mocha": "^10.4.0",
-    "node-abi": "3.47.0",
+    "node-abi": "4.2.0",
     "node-gyp": "^9.3.0",
     "prebuild": "^12.1.0",
     "prebuildify": "^5.0.1",
     "ps-list": "^6.0.0",
     "typescript": "^3.8.3"
-  }
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }

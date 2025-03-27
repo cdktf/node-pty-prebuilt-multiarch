@@ -133,14 +133,14 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           corepack enable # we use yarn
-          yarn install --ignore-scripts
+          yarn install --ignore-scripts --ignore-engines
           node .prebuild/buildify.js
 
       - name: Windows - Prebuild Binaries
         if: runner.os == 'Windows'
         shell: bash
         run: |
-          yarn install --ignore-scripts
+          yarn install --ignore-scripts --ignore-engines
           node .prebuild/buildify-windows.js
 
       - uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
