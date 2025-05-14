@@ -43,7 +43,15 @@ updates:
       - "dependencies"
       - "automerge"
       - "auto-approve"
-    # only update hashicorp actions, external actions managed by tsccr
-    allow:
-      - dependency-name: "hashicorp/*"
-      - dependency-name: "hashicorpdev/*"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: "github-actions"
+    directory: /
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-minor", "version-update:semver-patch"]
