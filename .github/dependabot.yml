@@ -38,20 +38,16 @@ updates:
   - package-ecosystem: "github-actions"
     directory: /
     schedule:
-      interval: "daily"
+      interval: "monthly"
     labels:
       - "dependencies"
       - "automerge"
       - "auto-approve"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
-  - package-ecosystem: "github-actions"
-    directory: /
-    schedule:
-      interval: "monthly"
-    labels:
-      - "dependencies"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-minor", "version-update:semver-patch"]
+    groups:
+      github-actions-breaking:
+        update-types:
+          - "major"
+      github-actions-backward-compatible:
+        update-types:
+          - "minor"
+          - "patch"
