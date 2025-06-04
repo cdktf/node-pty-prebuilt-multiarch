@@ -47,42 +47,42 @@ jobs:
             BASE_IMAGE: library/node:16-alpine
             DOCKERFILE: Dockerfile.alpine
             QEMU_ARCH: x86_64
-            NPMCOUNT: 6
+            NPMCOUNT: 3
 
           - name: alpine-arm32v6
             os: ubuntu-latest
             BASE_IMAGE: arm32v6/node:16-alpine
             DOCKERFILE: Dockerfile.alpine
             QEMU_ARCH: arm
-            NPMCOUNT: 6
+            NPMCOUNT: 3
 
           - name: alpine-arm64v8
             os: ubuntu-latest
             BASE_IMAGE: arm64v8/node:16-alpine
             DOCKERFILE: Dockerfile.alpine
             QEMU_ARCH: aarch64
-            NPMCOUNT: 6
+            NPMCOUNT: 3
 
           - name: debian-x86_64
             os: ubuntu-latest
             BASE_IMAGE: library/debian:bullseye-slim
             DOCKERFILE: Dockerfile.debian
             QEMU_ARCH: x86_64
-            NPMCOUNT: 6
+            NPMCOUNT: 3
 
           - name: debian-i386
             os: ubuntu-latest
             BASE_IMAGE: i386/debian:bullseye-slim
             DOCKERFILE: Dockerfile.debian
             QEMU_ARCH: i386
-            NPMCOUNT: 6
+            NPMCOUNT: 3
 
           - name: debian-arm32v6
             os: ubuntu-latest
             BASE_IMAGE: balenalib/raspberrypi3-debian:bullseye
             DOCKERFILE: Dockerfile.debian
             QEMU_ARCH: arm
-            NPMCOUNT: 6
+            NPMCOUNT: 3
 
           - name: debian-arm64v8
             os: ubuntu-latest
@@ -90,11 +90,11 @@ jobs:
             DOCKERFILE: Dockerfile.debian
             QEMU_ARCH: aarch64
             PLATFORM: --platform=linux/arm64
-            NPMCOUNT: 6
+            NPMCOUNT: 3
 
           - name: darwin-x86_64
             os: macOS-latest
-            NPMCOUNT: 0
+            NPMCOUNT: 3
 
           - name: darwin-arm64
             # xlarge is arm64
@@ -104,7 +104,7 @@ jobs:
 
           - name: windows-x86_64
             os: windows-2022
-            NPMCOUNT: 3
+            NPMCOUNT: 0
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -159,6 +159,7 @@ jobs:
         uses: andstor/file-existence-action@076e0072799f4942c8bc574a82233e1e4d13e9d6 # v3.0.0
         with:
           files: "prebuilds/*/node*node"
+          fail: ${{ runner.os != 'Windows' }}
 
       - name: Check NPM prebuilds exist
         if: steps.check_files.outputs.files_exists == 'true'
