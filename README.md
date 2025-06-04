@@ -28,7 +28,7 @@ When `node-pty-prebuilt-multiarch` is installed as a package dependency, the ins
 | Windows         | ia32, x64                   |
 
 
-*We only provide prebuilt binaries for Node.js 10 and Electron 5.0.0 or higher.
+*We only provide prebuilt binaries for Node.js 20 and Electron 20.0.0 or higher.
 
 ## License
 
