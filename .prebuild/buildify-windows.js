@@ -22,12 +22,9 @@ const cwd = path.resolve(__dirname, "../");
 
 // define build targets
 const nodeBuildTargets = [
-  "17.0.1",
-  "18.0.0",
-  "19.0.0",
   "20.0.0",
-  "21.0.0",
   "22.0.0",
+  "24.0.0",
 ].reduce((acc, ver) => {
   acc.push("-t");
   acc.push(ver);

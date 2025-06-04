@@ -13,11 +13,15 @@ on:
         description: The fully qualified name of the repository to check out the commit from
         type: string
         default: ${{ github.repository }}
+      prebuild_count:
+        required: true
+        description: How many prebuilt versions are expected to be generated
+        type: number
       node_version:
         required: false
         description: Version of Node to use for setup-node
         type: string
-        default: 20.x
+        default: lts/*
 
 permissions:
   contents: read
@@ -62,27 +66,28 @@ jobs:
 
           - name: debian-x86_64
             os: ubuntu-latest
-            BASE_IMAGE: library/debian:11.7-slim
+            BASE_IMAGE: library/debian:bullseye-slim
             DOCKERFILE: Dockerfile.debian
             QEMU_ARCH: x86_64
 
           - name: debian-i386
             os: ubuntu-latest
-            BASE_IMAGE: i386/debian:11.7-slim
+            BASE_IMAGE: i386/debian:bullseye-slim
             DOCKERFILE: Dockerfile.debian
             QEMU_ARCH: i386
 
           - name: debian-arm32v6
             os: ubuntu-latest
-            BASE_IMAGE: balenalib/raspberry-pi-debian:bullseye
+            BASE_IMAGE: balenalib/raspberrypi3-debian:bullseye
             DOCKERFILE: Dockerfile.debian
             QEMU_ARCH: arm
 
           - name: debian-arm64v8
             os: ubuntu-latest
-            BASE_IMAGE: arm64v8/debian:11.7-slim
+            BASE_IMAGE: arm64v8/debian:bullseye
             DOCKERFILE: Dockerfile.debian
             QEMU_ARCH: aarch64
+            PLATFORM: --platform=linux/arm64
 
           - name: darwin-x86_64
             os: macOS-latest
@@ -112,10 +117,10 @@ jobs:
           sudo apt-get --yes --no-install-recommends install binfmt-support qemu-user-static
           docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
-      - name: Linux - Build Docker Image
+      - name: Linux - Build Docker Image ${{ matrix.DOCKERFILE }} - ${{ matrix.BASE_IMAGE }} - ${{ matrix.QEMU_ARCH }}
         if: runner.os == 'Linux'
         run: |
-          docker build -f .prebuild/${{ matrix.DOCKERFILE }} --build-arg BASE_IMAGE=${{ matrix.BASE_IMAGE }} --build-arg QEMU_ARCH=${{ matrix.QEMU_ARCH }} -t multiarch-build .
+          docker build -f .prebuild/${{ matrix.DOCKERFILE }} --build-arg BASE_IMAGE=${{ matrix.BASE_IMAGE }} --build-arg QEMU_ARCH=${{ matrix.QEMU_ARCH }} -t multiarch-build ${{ matrix.PLATFORM }} .
 
       - name: Linux - Prebuild Binaries
         if: runner.os == 'Linux'
@@ -142,6 +147,21 @@ jobs:
         run: |
           yarn install --ignore-scripts --ignore-engines
           node .prebuild/buildify-windows.js
+
+      - name: "Check file existence"
+        id: check_files
+        uses: andstor/file-existence-action@076e0072799f4942c8bc574a82233e1e4d13e9d6 # v3.0.0
+        with:
+          files: "prebuilds/*/node*node"
+          fail: ${{ runner.os != 'Windows' }}
+
+      - name: Check NPM prebuilds exist
+        if: steps.check_files.outputs.files_exists == 'true'
+        shell: bash
+        run: |
+          fileCount=$(ls prebuilds/*/node*node | wc -l)
+          echo "NPM Prebuild count ${fileCount}"
+          if [ "$fileCount" -ne ${{ inputs.prebuild_count }} ]; then echo "::warning::Release NPM Prebuild count ${fileCount}, expected ${{ inputs.prebuild_count }}"; else echo "::notice::Release NPM Prebuild count ${fileCount}, expected ${{ inputs.prebuild_count }}"; fi
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
