@@ -21,7 +21,7 @@ on:
         required: false
         description: Version of Node to use for setup-node
         type: string
-        default: lts
+        default: lts/*
 
 permissions:
   contents: read
