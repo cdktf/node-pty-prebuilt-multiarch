@@ -2099,19 +2099,12 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-node-abi@4.2.0:
+node-abi@4.2.0, node-abi@^3.3.0, node-abi@^3.47.0:
   version "4.2.0"
   resolved "https://registry.npmjs.org/node-abi/-/node-abi-4.2.0.tgz#cf74fb14584a420091723bbb3bb59b6bc4ea639c"
   integrity sha512-admQxilhDcmFJbUl4LQzGu+QyEijW9rctKRH2P7LNavAvln1bdK9OcujM3yi2KysKI41dxTrDtp6QfGEZeCbkg==
   dependencies:
     semver "^7.6.3"
-
-node-abi@^3.3.0, node-abi@^3.47.0:
-  version "3.47.0"
-  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.47.0.tgz#6cbfa2916805ae25c2b7156ca640131632eb05e8"
-  integrity sha512-2s6B2CWZM//kPgwnuI0KrYwNjfdByE25zvAaEpq9IH4zcNsarH8Ihu/UuX6XMPEogDAxkuUFeZn60pXNHAqn3A==
-  dependencies:
-    semver "^7.3.5"
 
 node-api-headers@^0.0.2:
   version "0.0.2"
@@ -3064,9 +3057,9 @@ table@^5.2.3:
     string-width "^3.0.0"
 
 tar-fs@^2.0.0, tar-fs@^2.1.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-2.1.1.tgz#489a15ab85f1f0befabb370b7de4f9eb5cbe8784"
-  integrity sha512-V0r2Y9scmbDRLCNex/+hYzvp/zyYjvFbHPNgVTKfQvVrb6guiE/fxP+XblDNR011utopbkex2nM4dHNV6GDsng==
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-2.1.3.tgz#fb3b8843a26b6f13a08e606f7922875eb1fbbf92"
+  integrity sha512-090nwYJDmlhwFwEW3QQl+vaNnxsO2yVsd45eTKRBzSzu+hlb1w2K9inVq5b0ngXuLVqQ4ApvsUHHnu/zQNkWAg==
   dependencies:
     chownr "^1.1.1"
     mkdirp-classic "^0.5.2"
