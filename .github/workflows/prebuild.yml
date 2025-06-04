@@ -147,3 +147,4 @@ jobs:
         with:
           name: ${{ matrix.name }}
           path: prebuilds
+          include-hidden-files: true
